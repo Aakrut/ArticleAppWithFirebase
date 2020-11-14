@@ -8,3 +8,8 @@
 ### 2) RealTime FirestoreDatabase
 
 ## for profile picture upload we will use Firebase storage
+
+## I Will use Firestore for my Database 
+
+## For setup your Firebase check out this Link : https://firebase.google.com/docs/android/setup
+
