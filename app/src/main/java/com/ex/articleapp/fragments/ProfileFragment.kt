@@ -25,6 +25,10 @@ class ProfileFragment : Fragment() {
         profileBinding = FragmentProfileBinding.inflate(inflater,container,false)
         val view = binding!!.root
 
+        profileBinding!!.moreVert.setOnClickListener {
+            startActivity(Intent(context,ProfileEditActvitiy::class.java))
+        }
+
 
 
 

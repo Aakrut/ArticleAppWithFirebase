@@ -5,21 +5,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import com.ex.articleapp.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
+
+    private lateinit var signUpBinding: ActivitySignUpBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        signUpBinding = ActivitySignUpBinding.inflate(layoutInflater)
+        val view = signUpBinding.root
+        setContentView(view)
 
-        val text_login : TextView = findViewById(R.id.login_text)
 
-        val button : Button = findViewById(R.id.button_next)
 
-        button.setOnClickListener {
+        signUpBinding.buttonNext.setOnClickListener {
             startActivity(Intent(this,InformationActivity::class.java))
         }
 
-        text_login.setOnClickListener {
+        signUpBinding.loginText.setOnClickListener {
             startActivity(Intent(this,LogInActivity::class.java))
         }
     }

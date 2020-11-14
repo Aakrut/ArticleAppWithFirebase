@@ -4,15 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.ex.articleapp.databinding.ActivityLogInBinding
 
 class LogInActivity : AppCompatActivity() {
+
+    private lateinit var logInBinding: ActivityLogInBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_log_in)
+        logInBinding = ActivityLogInBinding.inflate(layoutInflater)
+        val view = logInBinding.root
+        setContentView(view)
 
-        val text_signUp : TextView = findViewById(R.id.create_one_text)
 
-        text_signUp.setOnClickListener {
+
+        logInBinding.createOneText.setOnClickListener {
             startActivity(Intent(this,SignUpActivity::class.java))
         }
 
