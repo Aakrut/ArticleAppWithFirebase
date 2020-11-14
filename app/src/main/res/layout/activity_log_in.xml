@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
-        android:id="@+id/email_password"
+        android:id="@+id/email_password_login"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
@@ -66,9 +66,9 @@
         android:textAllCaps="false"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/email_password"
-        app:layout_constraintStart_toStartOf="@+id/email_password"
-        app:layout_constraintTop_toBottomOf="@+id/email_password" />
+        app:layout_constraintEnd_toEndOf="@+id/email_password_login"
+        app:layout_constraintStart_toStartOf="@+id/email_password_login"
+        app:layout_constraintTop_toBottomOf="@+id/email_password_login" />
 
 
     <TextView
