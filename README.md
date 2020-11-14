@@ -7,7 +7,7 @@
 ### 1) RealTime FirebaseDatabase 
 ### 2) RealTime FirestoreDatabase
 
-## for profile picture upload we will use Firebase storage
+## for profile picture upload I Will use Firebase storage
 
 ## I Will use Firestore for my Database 
 
