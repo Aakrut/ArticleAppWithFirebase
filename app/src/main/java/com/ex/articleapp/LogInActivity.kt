@@ -39,6 +39,7 @@ class LogInActivity : AppCompatActivity() {
 
     }
 
+    //FirebaseLogin
     private fun login() {
         if(logInBinding.emailLogIn.text.toString() == ""){
             Toast.makeText(this, "Please Enter Your Email", Toast.LENGTH_SHORT).show()

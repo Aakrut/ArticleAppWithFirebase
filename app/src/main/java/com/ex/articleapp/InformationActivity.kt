@@ -44,6 +44,8 @@ class InformationActivity : AppCompatActivity() {
 
     }
 
+    //Firebase Adding Informations to Database
+
     private fun addInformation() {
         if(informationBinding.usernameSignUp.text.toString() == ""){
             Toast.makeText(this, "Please Enter Your Username", Toast.LENGTH_SHORT).show()

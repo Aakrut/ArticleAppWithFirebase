@@ -43,7 +43,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    //Firebase Adding New User
+    //Firebase Create New User
     private fun buttonClick() {
         if(signUpBinding.emailSignUp.text.toString() == ""){
             Toast.makeText(this, "Please Enter Your Email", Toast.LENGTH_SHORT).show()
