@@ -29,13 +29,10 @@ class ProfileEditActvitiy : AppCompatActivity() {
         
         firebaseAuth = Firebase.auth
 
-//        var username_text : String = .toString()
-//        var fullname_text : String = .toString()
-//        var bio_text : String =  .toString()
-
-
+        //Database initialize
         val db = Firebase.firestore
-        
+
+        //FireBase FireStore Reference
         val ref = db.collection("Users").document(firebaseAuth.currentUser!!.uid)
         
         ref.addSnapshotListener { snapshot, e ->
