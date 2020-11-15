@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
 
         firebaseAuth = Firebase.auth
 
-        var username: String = fragmentHomeBinding!!.usernameText.text.toString()
+
 
         //initialize DataBase
         val db = Firebase.firestore
@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
             if (snapshot != null && snapshot.exists()) {
 
                 val user : User ? = snapshot.toObject(User::class.java)
-                username = user!!.username
+                fragmentHomeBinding!!.usernameText.text = user!!.username
                 Log.d(TAG, "Current data: ${snapshot.data}")
 
             } else {
