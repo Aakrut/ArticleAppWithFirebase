@@ -36,8 +36,6 @@ class HomeFragment : Fragment() {
 
         firebaseAuth = Firebase.auth
 
-
-
         //initialize DataBase
         val db = Firebase.firestore
 
