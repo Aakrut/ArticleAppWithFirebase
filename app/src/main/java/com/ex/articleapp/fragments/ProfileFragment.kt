@@ -10,11 +10,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.ex.articleapp.ProfileEditActvitiy
 import com.ex.articleapp.R
+import com.ex.articleapp.data.User
 import com.ex.articleapp.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 
 
 class ProfileFragment : Fragment() {
@@ -50,6 +52,16 @@ class ProfileFragment : Fragment() {
             }
 
             if (snapshot != null && snapshot.exists()) {
+
+                val user: User? = snapshot.toObject(User::class.java)
+
+                profileBinding!!.profileTextUsername.text = user!!.username
+                profileBinding!!.profileTextFullName.text = user.fullName
+                profileBinding!!.profileTextBio.text = user.bio
+                Picasso.get().load(user.profile_photo).into(profileBinding!!.profileImageView)
+
+
+
                 Log.d(TAG, "Current data: ${snapshot.data}")
             } else {
                 Log.d(TAG, "Current data: null")
