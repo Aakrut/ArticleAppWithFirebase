@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.startActivityForResult
 import com.ex.articleapp.data.User
 import com.ex.articleapp.databinding.ActivityProfileEditActvitiyBinding
 import com.google.android.gms.tasks.Continuation
@@ -15,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
@@ -35,9 +38,9 @@ class ProfileEditActvitiy : AppCompatActivity() {
     //Firebase Storage
     private var storage_e : StorageReference?= null
 
-    private var image_URI : Uri ?= null
+    private var image_URI: Uri ?= null
 
-    private val REQUEST_CODE = 438
+    private val RequestCode = 438
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +49,8 @@ class ProfileEditActvitiy : AppCompatActivity() {
         setContentView(view)
         
         firebaseAuth = Firebase.auth
+
+        storage_e = FirebaseStorage.getInstance().reference.child("User Images")
 
         //Database initialize
         val db = Firebase.firestore
@@ -78,11 +83,10 @@ class ProfileEditActvitiy : AppCompatActivity() {
         }
 
         profileEditActvitiyBinding.profileEditImageViewCirlce.setOnClickListener {
-            pickimage()
+          pickImage()
         }
 
     }
-
 
 
     private fun updateProfile() {
@@ -115,23 +119,22 @@ class ProfileEditActvitiy : AppCompatActivity() {
         }
     }
 
-
-    private fun pickimage() {
-
+    private fun pickImage() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(intent,REQUEST_CODE)
+        startActivityForResult(intent, RequestCode)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK && data!!.data != null){
+        if(requestCode == RequestCode && resultCode == Activity.RESULT_OK && data!!.data != null){
             image_URI = data.data
             Toast.makeText(this, "Please Wait Image Uploading...", Toast.LENGTH_SHORT).show()
             uploadImagetoFirestore()
         }
     }
+
 
     private fun uploadImagetoFirestore() {
         if(image_URI != null){
@@ -163,3 +166,5 @@ class ProfileEditActvitiy : AppCompatActivity() {
     }
 
 }
+
+
