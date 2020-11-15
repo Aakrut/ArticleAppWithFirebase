@@ -41,13 +41,16 @@
                android:layout_centerVertical="true"
                />
 
-           <ImageView
+           <de.hdodenhof.circleimageview.CircleImageView
                android:id="@+id/circle_image_profile_home"
-               android:layout_width="60dp"
-               android:layout_height="60dp"
+               android:layout_width="50dp"
+               android:layout_height="50dp"
+               app:civ_border_width="1dp"
+               app:civ_border_color="@color/black"
                android:layout_centerVertical="true"
                android:layout_marginEnd="20dp"
                android:layout_marginStart="10dp"
+               android:layout_marginTop="10dp"
                android:src="@mipmap/ic_launcher"
                />
 

@@ -65,7 +65,8 @@ class InformationActivity : AppCompatActivity() {
                     "username" to username,
                     "fullName" to fullName,
                     "uid" to uid,
-                    "bio" to "I am Using Article App"
+                    "bio" to "I am Using Article App",
+                    "profile_photo" to "https://firebasestorage.googleapis.com/v0/b/social-netwok-clones.appspot.com/o/image.png?alt=media&token=57fc68a0-d052-4522-86c4-b81d1bfe74c8"
                 )
 
             db.collection("Users").document(uid).set(hashmap).addOnSuccessListener {
