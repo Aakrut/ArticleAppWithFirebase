@@ -54,10 +54,15 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     //FirebaseFireStore
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    //FirebaseStorage
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //CropImage
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 }
