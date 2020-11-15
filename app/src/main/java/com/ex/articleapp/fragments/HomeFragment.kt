@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 
 
 class HomeFragment : Fragment() {
@@ -54,6 +55,7 @@ class HomeFragment : Fragment() {
 
                 val user : User ? = snapshot.toObject(User::class.java)
                 fragmentHomeBinding!!.usernameText.text = user!!.username
+                Picasso.get().load(user.profile_photo).into(fragmentHomeBinding!!.circleImageProfileHome)
                 Log.d(TAG, "Current data: ${snapshot.data}")
 
             } else {
