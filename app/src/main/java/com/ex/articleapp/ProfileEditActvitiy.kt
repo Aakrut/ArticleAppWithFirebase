@@ -29,9 +29,9 @@ class ProfileEditActvitiy : AppCompatActivity() {
         
         firebaseAuth = Firebase.auth
 
-        var username_text : String = profileEditActvitiyBinding!!.profileEditTextUsername.text.toString()
-        var fullname_text = profileEditActvitiyBinding!!.profileEditTextFullName.text.toString()
-        var bio_text = profileEditActvitiyBinding!!.profileEditTextBio.text .toString()
+//        var username_text : String = .toString()
+//        var fullname_text : String = .toString()
+//        var bio_text : String =  .toString()
 
 
         val db = Firebase.firestore
@@ -46,10 +46,12 @@ class ProfileEditActvitiy : AppCompatActivity() {
 
             if (snapshot != null && snapshot.exists()) {
                 val user : User ?= snapshot.toObject(User::class.java)
-                username_text = user!!.username
-                fullname_text = user.fullName
-                bio_text = user.bio
-                Picasso.get().load(user.profile_photo).into(profileEditActvitiyBinding!!.profileEditImageViewCirlce)
+                profileEditActvitiyBinding.profileEditTextUsername.setText(user!!.username).toString()
+                profileEditActvitiyBinding.profileEditTextFullName.setText(user.fullName).toString()
+                profileEditActvitiyBinding.profileEditTextBio.setText(user.bio).toString()
+
+
+                Picasso.get().load(user!!.profile_photo).into(profileEditActvitiyBinding.profileEditImageViewCirlce)
                 Log.d(TAG, "Current data: ${snapshot.data}")
 
             } else {
