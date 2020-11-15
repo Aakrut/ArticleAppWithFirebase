@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
 import com.ex.articleapp.data.User
 import com.ex.articleapp.databinding.ActivityProfileEditActvitiyBinding
 import com.google.android.gms.tasks.Continuation
@@ -22,8 +20,6 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
-import com.theartofdev.edmodo.cropper.CropImage
-
 
 class ProfileEditActvitiy : AppCompatActivity() {
 
@@ -88,6 +84,7 @@ class ProfileEditActvitiy : AppCompatActivity() {
 
     }
 
+    //Firebase Update
 
     private fun updateProfile() {
         if(profileEditActvitiyBinding.profileEditTextUsername.text.toString() == "" || profileEditActvitiyBinding.profileEditTextFullName.text.toString() == ""
