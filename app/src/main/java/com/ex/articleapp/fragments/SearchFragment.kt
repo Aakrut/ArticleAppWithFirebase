@@ -70,7 +70,6 @@ class SearchFragment : Fragment() {
             searchBinding.editTextSearchUser.text.clear()
         }
 
-
         return view
 
     }

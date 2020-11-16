@@ -37,7 +37,6 @@ class SearchAdapter(val context : Context , val mUserList : List<User>) : Recycl
         holder.search_username!!.text = current_item.username
         holder.search_fullname!!.text = current_item.fullName
 
-
     }
 
     override fun getItemCount(): Int {
