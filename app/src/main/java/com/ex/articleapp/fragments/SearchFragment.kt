@@ -9,11 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ex.articleapp.R
 import com.ex.articleapp.adapter.SearchAdapter
 import com.ex.articleapp.data.User
 import com.ex.articleapp.databinding.FragmentSearchBinding
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -40,8 +38,8 @@ class SearchFragment : Fragment() {
         searchBinding = FragmentSearchBinding.inflate(inflater,container,false)
         val view = searchBinding.root
 
-
         mUser = ArrayList()
+
         searchAdapter = context?.let { mUser?.let { it1 -> SearchAdapter(it, it1) } }
 
         searchBinding.recyclerViewSearch.setHasFixedSize(true)
