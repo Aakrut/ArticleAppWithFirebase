@@ -77,7 +77,7 @@ class SearchFragment : Fragment() {
     private fun retrieveUsers(input: String) {
         val db = Firebase.firestore
 
-        val ref = db.collection("Users").orderBy("fullName").startAt(input).endAt(input + "\uf8ff").get().addOnSuccessListener { result ->
+        db.collection("Users").orderBy("fullName").startAt(input).endAt(input + "\uf8ff").get().addOnSuccessListener { result ->
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
                 val user : User = document.toObject(User::class.java)
