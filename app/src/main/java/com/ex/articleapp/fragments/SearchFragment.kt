@@ -82,7 +82,6 @@ class SearchFragment : Fragment() {
                 val user : User = document.toObject(User::class.java)
                 if(document != null){
                     mUser!!.add(user)
-
                 }else{
                     mUser!!.clear()
                 }
