@@ -39,6 +39,8 @@ class SearchFragment : Fragment() {
         searchBinding = FragmentSearchBinding.inflate(inflater,container,false)
         val view = searchBinding.root
 
+
+        mUser = ArrayList()
         searchAdapter = context?.let { mUser?.let { it1 -> SearchAdapter(it, it1) } }
 
         searchBinding.recyclerViewSearch.setHasFixedSize(true)
@@ -80,11 +82,11 @@ class SearchFragment : Fragment() {
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
                 val user : User = document.toObject(User::class.java)
-                if(document != null){
-                    mUser!!.add(user)
-                }else{
-                    mUser!!.clear()
-                }
+               if(user != null){
+                   mUser!!.add(user)
+               }else{
+                   mUser!!.clear()
+               }
             }
             searchAdapter!!.notifyDataSetChanged()
         }
