@@ -22,12 +22,13 @@ class SearchFragment : Fragment() {
 
     private val TAG = "SearchFragment"
 
+    //ViewBinding
     private lateinit var searchBinding: FragmentSearchBinding
 
-    private lateinit var firebaseAuth: FirebaseAuth
-
+    //User
     private var mUser : MutableList<User> ?= null
 
+    //Adapter
     private  var searchAdapter: SearchAdapter ?= null
 
 
@@ -74,6 +75,7 @@ class SearchFragment : Fragment() {
 
     }
 
+    //Searching the User
     private fun retrieveUsers(input: String) {
         val db = Firebase.firestore
 
