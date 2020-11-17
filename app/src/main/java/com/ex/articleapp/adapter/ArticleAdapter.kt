@@ -56,6 +56,8 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
         holder.title_text!!.text = current_item.title
         holder.about_text!!.text = current_item.about
         holder.explanation_text!!.text = current_item.explanation
+
+
         
         holder.comment_btn!!.setOnClickListener {
             Log.d(TAG, "onBindViewHolder: Comment Button Clicked")
@@ -84,7 +86,7 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
                 Log.d(TAG, "Current data: ${snapshot.data}")
                 val user : User ?= snapshot.toObject(User::class.java)
                 usernameText!!.text = user!!.username
-                Picasso.get().load(user.profile_photo).placeholder(R.drawable.ic_launcher_background).into(circleImageHome)
+                Picasso.get().load(user!!.profile_photo).placeholder(R.drawable.ic_launcher_background).into(circleImageHome)
             } else {
                 Log.d(TAG, "Current data: null")
             } }

@@ -81,8 +81,10 @@ class HomeFragment : Fragment() {
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
 
-                    (followingList as ArrayList<String>).add(document.id)
 
+                document.id.let{
+                    (followingList as ArrayList<String>).add(it)
+                }
 
                     retrieveAllArticle()
 
@@ -104,13 +106,15 @@ class HomeFragment : Fragment() {
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
                 val article : Article = document.toObject(Article::class.java)
-                for(userId in ( mArticle as ArrayList<Article>)){
-                    if(article.publisher == userId.toString()){
-                        Log.d(TAG, "retrieveAllArticle: Retreiving All")
+                Log.d(TAG, "retrieveAllArticle: $article")
+                for(userId in (followingList as ArrayList<String>)){
+                    if(article.publisher == userId){
                         mArticle!!.add(article)
+                        Log.d(TAG, "retrieveAllArticle: SuccessFully Reached")
                     }
-                    articleAdapter!!.notifyDataSetChanged()
+                    articleAdapter?.notifyDataSetChanged()
                 }
+
 //                mArticle!!.add(article)
 //                articleAdapter!!.notifyDataSetChanged()
             }
