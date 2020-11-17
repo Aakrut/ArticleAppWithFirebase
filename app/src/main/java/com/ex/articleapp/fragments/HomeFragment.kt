@@ -50,11 +50,6 @@ class HomeFragment : Fragment() {
 
         mArticle = ArrayList()
 
-        articleAdapter = context?.let { ArticleAdapter(it, mArticle as ArrayList<Article>) }
-
-        fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
-        fragmentHomeBinding!!.recyclerViewHome.layoutManager = LinearLayoutManager(context)
-        fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
 
         //initialize DataBase
         val db = Firebase.firestore
@@ -81,8 +76,13 @@ class HomeFragment : Fragment() {
             }
         }
 
-        followingList = ArrayList()
 
+
+        articleAdapter = context?.let { ArticleAdapter(it, mArticle as ArrayList<Article>) }
+
+        fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
+        fragmentHomeBinding!!.recyclerViewHome.layoutManager = LinearLayoutManager(context)
+        fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
 
 
 
@@ -92,6 +92,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun checkFollowing() {
+
+        followingList = ArrayList()
         val db = Firebase.firestore
 
         val reff = db.collection("Follow").document(firebaseAuth.currentUser!!.uid).collection("Following")

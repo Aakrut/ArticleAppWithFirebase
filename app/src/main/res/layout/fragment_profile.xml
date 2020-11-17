@@ -67,6 +67,14 @@
            android:textColor="@color/black"
            />
 
+       <ImageView
+           android:id="@+id/logout_button"
+           android:layout_width="40dp"
+           android:layout_height="40dp"
+           android:layout_marginTop="20dp"
+           android:layout_marginStart="20dp"
+           android:src="@drawable/ic_baseline_logout_24"/>
+
    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
