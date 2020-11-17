@@ -19,6 +19,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -86,6 +88,21 @@ class HomeFragment : Fragment() {
         followingList = ArrayList()
 
 
+
+
+        GlobalScope.launch {
+            checkFollowing()
+        }
+
+
+        return view
+    }
+
+    private fun checkFollowing() {
+
+
+        val db = Firebase.firestore
+
         val reff = db.collection("Follow").document(firebaseAuth.currentUser!!.uid).collection("Following")
 
         reff.get().addOnSuccessListener {
@@ -99,26 +116,6 @@ class HomeFragment : Fragment() {
                     (followingList as ArrayList<String>).add(it)
                 }
                 retrieveAllArticle()
-                val db = Firebase.firestore
-                val ref = db.collection("Articles")
-
-                ref.get().addOnSuccessListener { result ->
-
-                    mArticle!!.clear()
-                    for (document in result) {
-                        Log.d(TAG, "${document.id} => ${document.data}")
-                        val article : Article = document.toObject(Article::class.java)
-                        for(userId in ( mArticle as ArrayList<String>)){
-                            if(article.publisher == userId){
-                                mArticle!!.add(article)
-                            }
-                            articleAdapter!!.notifyDataSetChanged()
-                        }
-                    }
-                }
-                        .addOnFailureListener { exception ->
-                            Log.d(TAG, "Error getting documents: ", exception)
-                        }
 
             }
 
@@ -126,20 +123,29 @@ class HomeFragment : Fragment() {
             Toast.makeText(context, "Something Went Wrong", Toast.LENGTH_SHORT).show()
         }
 
-
-        checkFollowing()
-
-        return view
-    }
-
-    private fun checkFollowing() {
-
-
-
     }
 
     private fun retrieveAllArticle() {
+        val db = Firebase.firestore
+        val ref = db.collection("Articles")
 
+        ref.get().addOnSuccessListener { result ->
+
+            mArticle!!.clear()
+            for (document in result) {
+                Log.d(TAG, "${document.id} => ${document.data}")
+                val article : Article = document.toObject(Article::class.java)
+                for(userId in ( mArticle as ArrayList<String>)){
+                    if(article.publisher == userId){
+                        mArticle!!.add(article)
+                    }
+                    articleAdapter!!.notifyDataSetChanged()
+                }
+            }
+        }
+                .addOnFailureListener { exception ->
+                    Log.d(TAG, "Error getting documents: ", exception)
+                }
     }
 
 
