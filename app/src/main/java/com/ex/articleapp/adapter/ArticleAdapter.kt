@@ -46,7 +46,8 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        return ArticleViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.home_item_list,parent,false))
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.home_item_list,parent,false)
+        return ArticleViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {

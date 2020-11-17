@@ -31,10 +31,10 @@ class HomeFragment : Fragment() {
     //Firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
 
-    private var mArticle : List<Article> ?= null
+    private var mArticle : MutableList<Article> ?= null
 
 
-    private var followingList : List<Article> ?= null
+    private var followingList : MutableList<Article> ?= null
 
     private var articleAdapter: ArticleAdapter ?= null
 
@@ -78,16 +78,15 @@ class HomeFragment : Fragment() {
 
         fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
 
-        var linearLayoutManager: RecyclerView.LayoutManager?
-        linearLayoutManager = LinearLayoutManager(context)
-        linearLayoutManager.reverseLayout = true
-        linearLayoutManager.stackFromEnd = true
+        fragmentHomeBinding!!.recyclerViewHome.layoutManager = LinearLayoutManager(context)
 
         articleAdapter = context?.let { ArticleAdapter(it, mArticle as ArrayList<Article>) }
 
+        fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
+
         checkFollowing()
 
-        fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
+
 
 
 
@@ -105,7 +104,7 @@ class HomeFragment : Fragment() {
         ref.get().addOnSuccessListener {
             result ->
 
-            (followingList as ArrayList<Article>).clear()
+            (followingList as ArrayList<String>).clear()
 
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
