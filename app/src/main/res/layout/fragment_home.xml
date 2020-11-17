@@ -67,15 +67,9 @@
             android:id="@+id/recycler_view_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Home"
             android:layout_marginTop="5dp"
             android:layout_below="@+id/app_bar"/>
 
     </RelativeLayout>
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        fragmentHomeBinding = FragmentHomeBinding.inflate(inflater,container,false)
+        fragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater,container,false)
         val view = fragmentHomeBinding!!.root
 
         firebaseAuth = Firebase.auth
@@ -78,14 +78,7 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
         fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
 
-
         checkFollowing()
-
-
-
-
-
-
 
         return view
     }
