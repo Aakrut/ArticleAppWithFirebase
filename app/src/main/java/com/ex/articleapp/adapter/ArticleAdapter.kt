@@ -55,7 +55,7 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
         holder.title_text!!.text = current_item.title
         holder.about_text!!.text = current_item.about
         holder.explanation_text!!.text = current_item.explanation
-        holder.username_text!!.text = current_item.publisher_name
+        holder.username_text!!.text = current_item.publisher
             
         publishInfo(holder.circle_image_home)
         

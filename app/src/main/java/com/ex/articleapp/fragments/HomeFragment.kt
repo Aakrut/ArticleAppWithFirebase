@@ -83,6 +83,17 @@ class HomeFragment : Fragment() {
 
         followingList = ArrayList()
 
+
+
+
+        checkFollowing()
+
+        return view
+    }
+
+    private fun checkFollowing() {
+        val db = Firebase.firestore
+
         val reff = db.collection("Follow").document(firebaseAuth.currentUser!!.uid).collection("Following")
 
         reff.get().addOnSuccessListener {
@@ -102,15 +113,6 @@ class HomeFragment : Fragment() {
             Toast.makeText(context, "Something Went Wrong", Toast.LENGTH_SHORT).show()
         }
 
-
-        checkFollowing()
-
-        return view
-    }
-
-    private fun checkFollowing() {
-
-
     }
 
     private fun retrieveAllArticle() {
@@ -124,7 +126,7 @@ class HomeFragment : Fragment() {
                 Log.d(TAG, "${document.id} => ${document.data}")
                 val article : Article = document.toObject(Article::class.java)
                 for(userId in ( mArticle as ArrayList<String>)){
-                    if(article.publisher_name == userId.toString()){
+                    if(article.publisher == userId.toString()){
                         (mArticle as ArrayList<Article>).add(article)
                     }
                     articleAdapter!!.notifyDataSetChanged()
