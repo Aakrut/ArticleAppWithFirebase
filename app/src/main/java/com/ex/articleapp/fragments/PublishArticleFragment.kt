@@ -67,8 +67,7 @@ class PublishArticleFragment : Fragment() {
                     "publisher" to firebaseAuth.currentUser!!.uid,
                     "title" to title,
                     "about" to about,
-                    "explanation" to explanation,
-                    "title_id" to title_id
+                    "explanation" to explanation
             )
 
             ref.document(title_id).set(hashmap).addOnSuccessListener {

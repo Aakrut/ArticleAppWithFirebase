@@ -51,7 +51,7 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        val current_item = mArticle[position]
+        val current_item : Article = mArticle[position]
 
         holder.title_text!!.text = current_item.title
         holder.about_text!!.text = current_item.about
