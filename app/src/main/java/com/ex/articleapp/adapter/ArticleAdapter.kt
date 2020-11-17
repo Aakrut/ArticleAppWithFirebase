@@ -29,6 +29,7 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
     class ArticleViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         var circle_image_home : CircleImageView ? = null
         var username_text : TextView ?= null
+        var punlisher_name : TextView ?= null
         var title_text : TextView ?= null
         var about_text : TextView ?= null
         var explanation_text : TextView ?= null
@@ -36,7 +37,7 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
 
         init {
             circle_image_home = itemView.findViewById(R.id.circle_image_profile_home)
-            username_text = itemView.findViewById(R.id.text_home_username_item_list) 
+            username_text = itemView.findViewById(R.id.text_home_username_item_list)
             title_text = itemView.findViewById(R.id.text_home_title_item_list)
             about_text = itemView.findViewById(R.id.text_home_topic_item_list)
             explanation_text = itemView.findViewById(R.id.text_home_explanation_item_list)
@@ -54,6 +55,7 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
         holder.title_text!!.text = current_item.title
         holder.about_text!!.text = current_item.about
         holder.explanation_text!!.text = current_item.explanation
+
             
         publishInfo(holder.circle_image_home,holder.username_text)
         

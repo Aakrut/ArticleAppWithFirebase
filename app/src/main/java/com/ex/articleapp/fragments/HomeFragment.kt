@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ex.articleapp.R
 import com.ex.articleapp.adapter.ArticleAdapter
 import com.ex.articleapp.data.Article
@@ -73,17 +74,22 @@ class HomeFragment : Fragment() {
         }
 
         mArticle = ArrayList()
-        articleAdapter = context?.let { ArticleAdapter(it, mArticle as ArrayList<Article>) }
+
 
         fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
 
-        var linearLayoutManager = fragmentHomeBinding!!.recyclerViewHome.layoutManager
+        var linearLayoutManager: RecyclerView.LayoutManager?
         linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.reverseLayout = true
         linearLayoutManager.stackFromEnd = true
-        fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
+
+        articleAdapter = context?.let { ArticleAdapter(it, mArticle as ArrayList<Article>) }
 
         checkFollowing()
+
+        fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
+
+
 
 
 
