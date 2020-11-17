@@ -81,20 +81,11 @@ class HomeFragment : Fragment() {
             }
         }
 
-
-
-        checkFollowing()
-
-        return view
-    }
-
-    private fun checkFollowing() {
-
         followingList = ArrayList()
-            val db = Firebase.firestore
-            val ref = db.collection("Follow").document(firebaseAuth.currentUser!!.uid).collection("Following")
 
-        ref.get().addOnSuccessListener {
+        val reff = db.collection("Follow").document(firebaseAuth.currentUser!!.uid).collection("Following")
+
+        reff.get().addOnSuccessListener {
             result ->
 
             (followingList as ArrayList<String>).clear()
@@ -110,6 +101,16 @@ class HomeFragment : Fragment() {
         }.addOnFailureListener{
             Toast.makeText(context, "Something Went Wrong", Toast.LENGTH_SHORT).show()
         }
+
+
+        checkFollowing()
+
+        return view
+    }
+
+    private fun checkFollowing() {
+
+
     }
 
     private fun retrieveAllArticle() {
