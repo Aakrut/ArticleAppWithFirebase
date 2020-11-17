@@ -26,6 +26,18 @@
                 android:layout_marginTop="5dp" />
 
             <TextView
+                android:id="@+id/text_home_username_item_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="username"
+                android:layout_toEndOf="@id/circle_image_home_item_list"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#000"/>
+
+            <TextView
                 android:id="@+id/text_home_title_item_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,22 +71,12 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/like_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_heart_outline"
-                android:layout_below="@id/text_home_explanation_item_list"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"/>
-
-            <ImageView
                 android:id="@+id/comment_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_user_pin"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/like_button"
+                android:layout_marginStart="20dp"
                 android:layout_below="@id/text_home_explanation_item_list"/>
 
 
