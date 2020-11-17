@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ex.articleapp.R
+import com.ex.articleapp.adapter.ArticleAdapter
+import com.ex.articleapp.data.Article
 import com.ex.articleapp.data.User
 import com.ex.articleapp.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +29,13 @@ class HomeFragment : Fragment() {
 
     //Firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
+
+    private var mArticle : List<Article> ?= null
+
+
+    private var followingList : List<Article> ?= null
+
+    private var articleAdapter: ArticleAdapter ?= null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,12 +72,77 @@ class HomeFragment : Fragment() {
             }
         }
 
+        mArticle = ArrayList()
+        articleAdapter = context?.let { ArticleAdapter(it, mArticle as ArrayList<Article>) }
 
+        fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
+
+
+
+        var linearLayoutManager = fragmentHomeBinding!!.recyclerViewHome.layoutManager
+        linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.reverseLayout = true
+        linearLayoutManager.stackFromEnd = true
+
+
+
+        checkFollowing()
 
 
 
         return view
     }
 
+    private fun checkFollowing() {
+
+        followingList = ArrayList()
+            val db = Firebase.firestore
+            val ref = db.collection("Follow").document(firebaseAuth.currentUser!!.uid).collection("Following")
+
+        ref.get().addOnSuccessListener {
+            result ->
+
+            (followingList as ArrayList<Article>).clear()
+
+            for (document in result) {
+                Log.d(TAG, "${document.id} => ${document.data}")
+                document.id.let{
+                    (followingList as ArrayList<String>).add(it)
+                }
+                retrieveAllArticle()
+            }
+
+        }.addOnFailureListener{
+            Toast.makeText(context, "Something Went Wrong", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun retrieveAllArticle() {
+        val db = Firebase.firestore
+        val ref = db.collection("Articles")
+
+        ref.get().addOnSuccessListener { result ->
+
+            ( mArticle as ArrayList<Article>).clear()
+            for (document in result) {
+                Log.d(TAG, "${document.id} => ${document.data}")
+                val article : Article = document.toObject(Article::class.java)
+                for(userId in ( mArticle as ArrayList<String>)){
+                    if(article.publisher_name == userId.toString()){
+                        (mArticle as ArrayList<Article>).add(article)
+                    }
+                    articleAdapter!!.notifyDataSetChanged()
+                }
+            }
+        }
+                .addOnFailureListener { exception ->
+                    Log.d(TAG, "Error getting documents: ", exception)
+                }
+
+    }
+
 
 }
+
+
+
