@@ -6,63 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@drawable/app_bar_background"
-        app:layout_constraintCircleRadius="20dp"
-        android:elevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/app_bar_background"
+            app:layout_constraintCircleRadius="20dp"
+            android:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-           <TextView
-               android:id="@+id/hello_text"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Hello, "
-               android:textSize="20sp"
-               android:layout_toEndOf="@id/circle_image_profile_home"
-               android:layout_centerVertical="true"
-              />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-           <TextView
-               android:id="@+id/username_text"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="username"
-               android:textSize="20dp"
-               android:textStyle="bold"
-               android:layout_toEndOf="@id/hello_text"
-               android:layout_centerVertical="true"
-               />
+                <TextView
+                    android:id="@+id/hello_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hello, "
+                    android:textSize="20sp"
+                    android:layout_toEndOf="@id/circle_image_profile_home"
+                    android:layout_centerVertical="true"
+                    />
 
-           <de.hdodenhof.circleimageview.CircleImageView
-               android:id="@+id/circle_image_profile_home"
-               android:layout_width="50dp"
-               android:layout_height="50dp"
-               app:civ_border_width="1dp"
-               app:civ_border_color="@color/black"
-               android:layout_centerVertical="true"
-               android:layout_marginEnd="20dp"
-               android:layout_marginStart="10dp"
-               android:layout_marginTop="10dp"
-               android:src="@mipmap/ic_launcher"
-               />
+                <TextView
+                    android:id="@+id/username_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="username"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_toEndOf="@id/hello_text"
+                    android:layout_centerVertical="true"
+                    />
 
-       </RelativeLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circle_image_profile_home"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/ic_launcher"
+                    />
 
-    </com.google.android.material.appbar.AppBarLayout>
+            </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Home" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Home"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/app_bar"/>
+
+    </RelativeLayout>
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
