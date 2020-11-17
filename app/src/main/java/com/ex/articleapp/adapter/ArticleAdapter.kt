@@ -57,7 +57,7 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
         holder.explanation_text!!.text = current_item.explanation
         holder.username_text!!.text = current_item.publisher_name
             
-        publishInfo(holder.circle_image_home,holder.username_text)
+        publishInfo(holder.circle_image_home)
         
     }
     
@@ -65,7 +65,7 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
         return mArticle.size
     }
 
-    private fun publishInfo( circleImageHome: CircleImageView?, usernameText: TextView?) {
+    private fun publishInfo( circleImageHome: CircleImageView?) {
         firebaseAuth = Firebase.auth
         val db = Firebase.firestore
         val ref = db.collection("Users").document(firebaseAuth.currentUser!!.uid)
@@ -79,8 +79,7 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
             if (snapshot != null && snapshot.exists()) {
                 Log.d(TAG, "Current data: ${snapshot.data}")
                 val user : User ?= snapshot.toObject(User::class.java)
-                usernameText!!.text = user!!.username
-                Picasso.get().load(user.profile_photo).placeholder(R.drawable.ic_launcher_background).into(circleImageHome)
+                Picasso.get().load(user!!.profile_photo).placeholder(R.drawable.ic_launcher_background).into(circleImageHome)
             } else {
                 Log.d(TAG, "Current data: null")
             } }
