@@ -50,8 +50,10 @@ class HomeFragment : Fragment() {
 
         mArticle = ArrayList()
 
-        fragmentHomeBinding!!.recyclerViewHome.layoutManager = LinearLayoutManager(context)
+        articleAdapter = context?.let { ArticleAdapter(it, mArticle as ArrayList<Article>) }
+
         fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
+        fragmentHomeBinding!!.recyclerViewHome.layoutManager = LinearLayoutManager(context)
         fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
 
         //initialize DataBase
