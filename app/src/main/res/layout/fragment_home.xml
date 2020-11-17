@@ -29,34 +29,12 @@
                     android:id="@+id/hello_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hello, "
-                    android:textSize="20sp"
-                    android:layout_toEndOf="@id/circle_image_profile_home"
-                    android:layout_centerVertical="true"
-                    />
-
-                <TextView
-                    android:id="@+id/username_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="username"
-                    android:textSize="20dp"
+                    android:text="Article App"
+                    android:layout_marginStart="20dp"
+                    android:textColor="#000"
                     android:textStyle="bold"
-                    android:layout_toEndOf="@id/hello_text"
+                    android:textSize="20sp"
                     android:layout_centerVertical="true"
-                    />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/circle_image_profile_home"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:civ_border_width="1dp"
-                    app:civ_border_color="@color/black"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@mipmap/ic_launcher"
                     />
 
             </RelativeLayout>

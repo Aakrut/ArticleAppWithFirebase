@@ -35,7 +35,6 @@ class HomeFragment : Fragment() {
 
     private var mArticle : MutableList<Article> ?= null
 
-
     private var followingList : MutableList<Article> ?= null
 
     private var articleAdapter: ArticleAdapter ?= null
@@ -58,45 +57,16 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding!!.recyclerViewHome.layoutManager = LinearLayoutManager(context)
         fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
 
-
-        //initialize DataBase
-        val db = Firebase.firestore
-
-        //Reference Firebase FireStore
-        val ref = db.collection("Users").document(firebaseAuth.currentUser!!.uid)
-
-        ref.addSnapshotListener{
-            snapshot, e ->
-            if (e != null) {
-                Log.d(TAG, "Listen failed.", e)
-                return@addSnapshotListener
-            }
-
-            if (snapshot != null && snapshot.exists()) {
-
-                val user : User ? = snapshot.toObject(User::class.java)
-                fragmentHomeBinding!!.usernameText.text = user!!.username
-                Picasso.get().load(user.profile_photo).into(fragmentHomeBinding!!.circleImageProfileHome)
-                Log.d(TAG, "Current data: ${snapshot.data}")
-
-            } else {
-                Log.d(TAG, "Current data: null")
-            }
-        }
-
-
-
-
-
-
-
-
             checkFollowing()
 
 
 
         return view
     }
+
+    //Firebase
+
+    //For Whom You Are Following and That User Article Will Show Up
 
     private fun checkFollowing() {
 
@@ -113,9 +83,9 @@ class HomeFragment : Fragment() {
 
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
-                document.id.let{
-                    (followingList as ArrayList<String>).add(it)
-                }
+
+                    (followingList as ArrayList<String>).add(document.id)
+
 
                     retrieveAllArticle()
 
@@ -127,6 +97,7 @@ class HomeFragment : Fragment() {
 
     }
 
+    //Retrieving All Information About Article That Published
     private fun retrieveAllArticle() {
         val db = Firebase.firestore
         val ref = db.collection("Articles")
@@ -137,12 +108,8 @@ class HomeFragment : Fragment() {
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
                 val article : Article = document.toObject(Article::class.java)
-                for(userId in ( mArticle as ArrayList<String>)){
-                    if(article.publisher == userId){
-                        mArticle!!.add(article)
-                    }
-                    articleAdapter!!.notifyDataSetChanged()
-                }
+                mArticle!!.add(article)
+                articleAdapter!!.notifyDataSetChanged()
             }
         }.addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)

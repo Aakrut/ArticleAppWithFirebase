@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ex.articleapp.R
@@ -32,10 +33,10 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
         var title_text : TextView ?= null
         var about_text : TextView ?= null
         var explanation_text : TextView ?= null
-        var comment_btn : Button?= null
+        var comment_btn : ImageView ?= null
 
         init {
-            circle_image_home = itemView.findViewById(R.id.circle_image_profile_home)
+            circle_image_home = itemView.findViewById(R.id.circle_image_home_item_list)
             username_text = itemView.findViewById(R.id.text_home_username_item_list)
             title_text = itemView.findViewById(R.id.text_home_title_item_list)
             about_text = itemView.findViewById(R.id.text_home_topic_item_list)
@@ -56,8 +57,12 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
         holder.about_text!!.text = current_item.about
         holder.explanation_text!!.text = current_item.explanation
         holder.username_text!!.text = current_item.publisher
+        
+        holder.comment_btn!!.setOnClickListener {
+            Log.d(TAG, "onBindViewHolder: Comment Button Clicked")
+        }
             
-        publishInfo(holder.circle_image_home)
+        publishInfo(holder.circle_image_home,holder.username_text)
         
     }
     
@@ -65,11 +70,11 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
         return mArticle.size
     }
 
-    private fun publishInfo( circleImageHome: CircleImageView?) {
+    private fun publishInfo( circleImageHome: CircleImageView?,usernameText : TextView?) {
         firebaseAuth = Firebase.auth
         val db = Firebase.firestore
         val ref = db.collection("Users").document(firebaseAuth.currentUser!!.uid)
-        
+
         ref.addSnapshotListener {snapshot, e ->
             if (e != null) {
                 Log.d(TAG, "Listen failed.", e)
@@ -79,7 +84,8 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
             if (snapshot != null && snapshot.exists()) {
                 Log.d(TAG, "Current data: ${snapshot.data}")
                 val user : User ?= snapshot.toObject(User::class.java)
-                Picasso.get().load(user!!.profile_photo).placeholder(R.drawable.ic_launcher_background).into(circleImageHome)
+                usernameText!!.text = user!!.username
+                Picasso.get().load(user.profile_photo).placeholder(R.drawable.ic_launcher_background).into(circleImageHome)
             } else {
                 Log.d(TAG, "Current data: null")
             } }
