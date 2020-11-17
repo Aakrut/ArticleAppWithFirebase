@@ -60,16 +60,18 @@ class PublishArticleFragment : Fragment() {
             val explanation = publishArticleBinding.editTextExplanation.text.toString()
 
             val db = Firebase.firestore
-            val ref = db.collection("Articles").document(firebaseAuth.currentUser!!.uid)
+            val ref = db.collection("Articles")
+            val title_id = ref.document().id
 
             val hashmap = hashMapOf(
                     "publisher" to firebaseAuth.currentUser!!.uid,
                     "title" to title,
                     "about" to about,
-                    "explanation" to explanation
+                    "explanation" to explanation,
+                    "title_id" to title_id
             )
 
-            ref.set(hashmap).addOnSuccessListener {
+            ref.document(title_id).set(hashmap).addOnSuccessListener {
                 Log.d(TAG, "onCreateView: SuccessFully Published")
                 Toast.makeText(context, "SuccessFully Published", Toast.LENGTH_SHORT).show()
                 val intent = Intent()
