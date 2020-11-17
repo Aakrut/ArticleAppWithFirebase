@@ -123,13 +123,13 @@ class HomeFragment : Fragment() {
 
         ref.get().addOnSuccessListener { result ->
 
-            ( mArticle as ArrayList<Article>).clear()
+            mArticle!!.clear()
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
                 val article : Article = document.toObject(Article::class.java)
                 for(userId in ( mArticle as ArrayList<String>)){
-                    if(article.publisher == userId.toString()){
-                        (mArticle as ArrayList<Article>).add(article)
+                    if(article.publisher == userId){
+                        mArticle!!.add(article)
                     }
                     articleAdapter!!.notifyDataSetChanged()
                 }
