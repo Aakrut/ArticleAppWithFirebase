@@ -6,10 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.ex.articleapp.R
 import com.ex.articleapp.adapter.ArticleAdapter
 import com.ex.articleapp.data.Article
 import com.ex.articleapp.data.User
@@ -26,7 +25,7 @@ class HomeFragment : Fragment() {
     private val TAG = "HomeFragment"
 
     //ViewBinding
-    private var fragmentHomeBinding: FragmentHomeBinding ?= null
+    private var fragmentHomeBinding: FragmentHomeBinding?= null
 
     //Firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
@@ -75,14 +74,10 @@ class HomeFragment : Fragment() {
 
         mArticle = ArrayList()
 
-
-        fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
-
         fragmentHomeBinding!!.recyclerViewHome.layoutManager = LinearLayoutManager(context)
-
-        articleAdapter = context?.let { ArticleAdapter(it, mArticle as ArrayList<Article>) }
-
+        fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
         fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
+
 
         checkFollowing()
 
