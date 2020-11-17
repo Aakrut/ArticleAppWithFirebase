@@ -1,5 +1,6 @@
 package com.ex.articleapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.ex.articleapp.MainActivity
 import com.ex.articleapp.R
 import com.ex.articleapp.databinding.FragmentPublishArticleBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -70,6 +72,10 @@ class PublishArticleFragment : Fragment() {
             ref.set(hashmap).addOnSuccessListener {
                 Log.d(TAG, "onCreateView: SuccessFully Published")
                 Toast.makeText(context, "SuccessFully Published", Toast.LENGTH_SHORT).show()
+                val intent = Intent()
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                context?.startActivity(Intent(context,MainActivity::class.java))
+
             }.addOnFailureListener {
                 Log.d(TAG, "onCreateView: Not Published")
             }
