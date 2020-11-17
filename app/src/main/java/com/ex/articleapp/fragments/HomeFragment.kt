@@ -48,6 +48,12 @@ class HomeFragment : Fragment() {
 
         firebaseAuth = Firebase.auth
 
+        mArticle = ArrayList()
+
+        fragmentHomeBinding!!.recyclerViewHome.layoutManager = LinearLayoutManager(context)
+        fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
+        fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
+
         //initialize DataBase
         val db = Firebase.firestore
 
@@ -73,11 +79,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        mArticle = ArrayList()
 
-        fragmentHomeBinding!!.recyclerViewHome.layoutManager = LinearLayoutManager(context)
-        fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
-        fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
 
         checkFollowing()
 
