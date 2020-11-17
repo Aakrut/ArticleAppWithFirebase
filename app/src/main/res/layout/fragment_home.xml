@@ -14,7 +14,7 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="@drawable/app_bar_background"
+            android:background="#FFF"
             app:layout_constraintCircleRadius="20dp"
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
