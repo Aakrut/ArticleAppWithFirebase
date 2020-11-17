@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.ex.articleapp.LogInActivity
 import com.ex.articleapp.ProfileEditActvitiy
 import com.ex.articleapp.R
 import com.ex.articleapp.data.User
@@ -72,6 +73,11 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(context,ProfileEditActvitiy::class.java))
         }
 
+        profileBinding!!.logoutButton.setOnClickListener {
+            firebaseAuth.signOut()
+            startActivity(Intent(context,LogInActivity::class.java))
+
+        }
 
 
 

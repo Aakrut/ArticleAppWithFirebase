@@ -3,6 +3,7 @@ package com.ex.articleapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.ex.articleapp.databinding.ActivityInformationBinding
 import com.google.firebase.FirebaseApp
@@ -13,6 +14,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class InformationActivity : AppCompatActivity() {
+
+    private val TAG = "InformationActivity"
 
     //viewBinding
     private lateinit var informationBinding: ActivityInformationBinding
@@ -73,6 +76,19 @@ class InformationActivity : AppCompatActivity() {
 
                 Toast.makeText(this, "SuccessFully Created Account", Toast.LENGTH_SHORT).show()
 
+                val db = Firebase.firestore
+                val ref = db.collection("Follow").document(uid)
+
+                val hashmap = hashMapOf(
+                        uid to true
+                )
+
+                ref.collection("Following").document(uid).set(hashmap).addOnCompleteListener {
+                    task ->
+                    if(task.isSuccessful){
+                        Log.d(TAG, "addInformation: SuccessFully Following")
+                    }
+                }
                 startActivity(Intent(this,MainActivity::class.java))
 
             }.addOnFailureListener {
