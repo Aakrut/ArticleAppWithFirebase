@@ -90,9 +90,9 @@ class HomeFragment : Fragment() {
 
 
 
-        GlobalScope.launch {
+
             checkFollowing()
-        }
+
 
 
         return view
@@ -115,7 +115,10 @@ class HomeFragment : Fragment() {
                 document.id.let{
                     (followingList as ArrayList<String>).add(it)
                 }
-                retrieveAllArticle()
+
+                    retrieveAllArticle()
+
+
 
             }
 
@@ -142,12 +145,10 @@ class HomeFragment : Fragment() {
                     articleAdapter!!.notifyDataSetChanged()
                 }
             }
-        }
-                .addOnFailureListener { exception ->
+        }.addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)
                 }
     }
-
 
 }
 
