@@ -35,6 +35,7 @@ class HomeFragment : Fragment() {
 
     private var mArticle : MutableList<Article> ?= null
 
+
     private var followingList : MutableList<Article> ?= null
 
     private var articleAdapter: ArticleAdapter ?= null
@@ -63,10 +64,6 @@ class HomeFragment : Fragment() {
 
         return view
     }
-
-    //Firebase
-
-    //For Whom You Are Following and That User Article Will Show Up
 
     private fun checkFollowing() {
 
@@ -97,7 +94,6 @@ class HomeFragment : Fragment() {
 
     }
 
-    //Retrieving All Information About Article That Published
     private fun retrieveAllArticle() {
         val db = Firebase.firestore
         val ref = db.collection("Articles")
@@ -108,8 +104,15 @@ class HomeFragment : Fragment() {
             for (document in result) {
                 Log.d(TAG, "${document.id} => ${document.data}")
                 val article : Article = document.toObject(Article::class.java)
-                mArticle!!.add(article)
-                articleAdapter!!.notifyDataSetChanged()
+                for(userId in ( mArticle as ArrayList<Article>)){
+                    if(article.publisher == userId.toString()){
+                        Log.d(TAG, "retrieveAllArticle: Retreiving All")
+                        mArticle!!.add(article)
+                    }
+                    articleAdapter!!.notifyDataSetChanged()
+                }
+//                mArticle!!.add(article)
+//                articleAdapter!!.notifyDataSetChanged()
             }
         }.addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)

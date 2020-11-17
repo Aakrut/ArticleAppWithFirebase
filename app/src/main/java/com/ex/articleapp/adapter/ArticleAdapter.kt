@@ -56,7 +56,6 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
         holder.title_text!!.text = current_item.title
         holder.about_text!!.text = current_item.about
         holder.explanation_text!!.text = current_item.explanation
-        holder.username_text!!.text = current_item.publisher
         
         holder.comment_btn!!.setOnClickListener {
             Log.d(TAG, "onBindViewHolder: Comment Button Clicked")
