@@ -19,11 +19,6 @@
         android:icon="@drawable/ic_close_big"
         />
 
-    <item
-        android:id="@+id/notificaion"
-        android:title=""
-        android:icon="@drawable/ic_notification_outline"
-        />
 
     <item
         android:id="@+id/profile"

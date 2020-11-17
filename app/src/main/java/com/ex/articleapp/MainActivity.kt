@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var homeFragment : HomeFragment
     private lateinit var searchFragment : SearchFragment
     private lateinit var publishArticleFragment : PublishArticleFragment
-    private lateinit var notificationFragment : NotificationFragment
     private lateinit var profileFragment : ProfileFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +27,6 @@ class MainActivity : AppCompatActivity() {
             homeFragment = HomeFragment()
             searchFragment = SearchFragment()
             publishArticleFragment = PublishArticleFragment()
-            notificationFragment = NotificationFragment()
             profileFragment = ProfileFragment()
 
 
@@ -54,10 +52,6 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(publishArticleFragment)
                     return@setOnNavigationItemSelectedListener true
 
-                }
-                R.id.notificaion -> {
-                    loadFragment(notificationFragment)
-                    return@setOnNavigationItemSelectedListener true
                 }
                 R.id.profile -> {
                     loadFragment(profileFragment)
