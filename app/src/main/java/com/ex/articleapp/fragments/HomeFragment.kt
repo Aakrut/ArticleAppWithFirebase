@@ -77,14 +77,11 @@ class HomeFragment : Fragment() {
 
         fragmentHomeBinding!!.recyclerViewHome.setHasFixedSize(true)
 
-
-
         var linearLayoutManager = fragmentHomeBinding!!.recyclerViewHome.layoutManager
         linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.reverseLayout = true
         linearLayoutManager.stackFromEnd = true
-
-
+        fragmentHomeBinding!!.recyclerViewHome.adapter = articleAdapter
 
         checkFollowing()
 
