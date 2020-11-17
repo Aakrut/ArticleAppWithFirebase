@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
         }
 
 
-        followingList = ArrayList()
+
 
 
 
@@ -100,6 +100,7 @@ class HomeFragment : Fragment() {
 
     private fun checkFollowing() {
 
+        followingList = ArrayList()
 
         val db = Firebase.firestore
 
@@ -117,8 +118,6 @@ class HomeFragment : Fragment() {
                 }
 
                     retrieveAllArticle()
-
-
 
             }
 
