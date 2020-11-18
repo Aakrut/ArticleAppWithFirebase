@@ -73,6 +73,7 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(context,ProfileEditActvitiy::class.java))
         }
 
+        //LogOut Button
         profileBinding!!.logoutButton.setOnClickListener {
             firebaseAuth.signOut()
             startActivity(Intent(context,LogInActivity::class.java))

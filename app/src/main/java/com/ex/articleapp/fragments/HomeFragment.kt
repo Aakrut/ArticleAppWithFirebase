@@ -65,6 +65,7 @@ class HomeFragment : Fragment() {
         return view
     }
 
+    //Check Following List
     private fun checkFollowing() {
 
         followingList = ArrayList()
@@ -96,6 +97,7 @@ class HomeFragment : Fragment() {
 
     }
 
+    //Retrieve All Articles That You Follow
     private fun retrieveAllArticle() {
         val db = Firebase.firestore
         val ref = db.collection("Articles")
@@ -115,8 +117,6 @@ class HomeFragment : Fragment() {
                     articleAdapter?.notifyDataSetChanged()
                 }
 
-//                mArticle!!.add(article)
-//                articleAdapter!!.notifyDataSetChanged()
             }
         }.addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)

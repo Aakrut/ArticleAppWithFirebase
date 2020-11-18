@@ -24,7 +24,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         Handler().postDelayed({
 
-          //Checking if User is Logged or not
+          //Checking if User is Logged In or not
             if(firebase_user != null){
                 startActivity(Intent(this,MainActivity::class.java))
             }else{
