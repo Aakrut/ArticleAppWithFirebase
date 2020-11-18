@@ -75,6 +75,7 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
         return mArticle.size
     }
 
+    //Firebase Publisher Information
     private fun publishInfo(circleImageHome: CircleImageView?, usernameText: TextView?,publishername : TextView?, publisher: String) {
             val db = Firebase.firestore
         val ref = db.collection("Users").document(publisher)
@@ -100,28 +101,5 @@ class ArticleAdapter(val context : Context,val mArticle : List<Article>) : Recyc
         }
     }
 
-//    private fun publishInfo( circleImageHome: CircleImageView?,usernameText : TextView?) {
-//        firebaseAuth = Firebase.auth
-//        val db = Firebase.firestore
-//        val ref = db.collection("Users").document(firebaseAuth.currentUser!!.uid)
-//
-//        ref.addSnapshotListener {snapshot, e ->
-//            if (e != null) {
-//                Log.d(TAG, "Listen failed.", e)
-//                return@addSnapshotListener
-//            }
-//
-//            if (snapshot != null && snapshot.exists()) {
-//                Log.d(TAG, "Current data: ${snapshot.data}")
-//                val user : User ?= snapshot.toObject(User::class.java)
-//                usernameText!!.text = user!!.username
-//                Picasso.get().load(user!!.profile_photo).placeholder(R.drawable.ic_launcher_background).into(circleImageHome)
-//            } else {
-//                Log.d(TAG, "Current data: null")
-//            } }
-//
-//    }
-
-   
 
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ex.articleapp.adapter.SearchAdapter
 import com.ex.articleapp.data.User
 import com.ex.articleapp.databinding.FragmentSearchBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -24,7 +25,7 @@ class SearchFragment : Fragment() {
     private lateinit var searchBinding: FragmentSearchBinding
 
     //User
-    private var mUser : MutableList<User> ?= null
+    private var mUser : ArrayList<User> ?= null
 
     //Adapter
     private  var searchAdapter: SearchAdapter ?= null
@@ -73,25 +74,50 @@ class SearchFragment : Fragment() {
 
     }
 
+
+
     //Searching the User
+//    private fun retrieveUsers(input: String) {
+//        val db = Firebase.firestore
+//
+//        db.collection("Users").orderBy("username").limit(1).startAt(input).endAt(input + "\uf8ff").get().addOnSuccessListener { result ->
+//            for (document in result) {
+//                Log.d(TAG, "${document.id} => ${document.data}")
+//                val user : User = document.toObject(User::class.java)
+//               if(user != null){
+//                   mUser!!.add(user)
+//               }else{
+//                   mUser!!.clear()
+//               }
+//            }
+//            searchAdapter!!.notifyDataSetChanged()
+//        }
+//                .addOnFailureListener { exception ->
+//                    Log.d(TAG, "Error getting documents: ", exception)
+//                }
+//    }
+
     private fun retrieveUsers(input: String) {
         val db = Firebase.firestore
 
-        db.collection("Users").orderBy("fullName").startAt(input).endAt(input + "\uf8ff").get().addOnSuccessListener { result ->
-            for (document in result) {
-                Log.d(TAG, "${document.id} => ${document.data}")
-                val user : User = document.toObject(User::class.java)
-               if(user != null){
-                   mUser!!.add(user)
-               }else{
-                   mUser!!.clear()
-               }
-            }
-            searchAdapter!!.notifyDataSetChanged()
-        }
-                .addOnFailureListener { exception ->
-                    Log.d(TAG, "Error getting documents: ", exception)
+        db.collection("Users").orderBy("username").limit(3).startAt(input).endAt(input + "\uf8ff")
+                .addSnapshotListener { snapshot, error ->
+                    mUser?.clear()
+            if(error != null){
+                Log.d(TAG, "retrieveUsers: error")
+            }else{
+                mUser?.clear()
+                for (document in snapshot!!) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                    val user : User = document.toObject(User::class.java)
+
+                        mUser!!.add(user)
+
                 }
+                searchAdapter!!.notifyDataSetChanged()
+            }
+
+        }
     }
 
 

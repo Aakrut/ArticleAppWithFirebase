@@ -86,7 +86,7 @@ class SearchAdapter(val context : Context , val mUserList : List<User>) : Recycl
             }else{
                 firebaseUser = FirebaseAuth.getInstance().currentUser
                 val db =  Firebase.firestore
-                val ref_delete = db.collection("Follow").document(firebaseUser!!.uid).collection("Following")
+                 db.collection("Follow").document(firebaseUser!!.uid).collection("Following")
                         .document(current_item.uid).delete().addOnCompleteListener {
                             task ->
                             if(task.isSuccessful){
