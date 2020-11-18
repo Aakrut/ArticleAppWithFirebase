@@ -75,28 +75,7 @@ class SearchFragment : Fragment() {
     }
 
 
-
     //Searching the User
-//    private fun retrieveUsers(input: String) {
-//        val db = Firebase.firestore
-//
-//        db.collection("Users").orderBy("username").limit(1).startAt(input).endAt(input + "\uf8ff").get().addOnSuccessListener { result ->
-//            for (document in result) {
-//                Log.d(TAG, "${document.id} => ${document.data}")
-//                val user : User = document.toObject(User::class.java)
-//               if(user != null){
-//                   mUser!!.add(user)
-//               }else{
-//                   mUser!!.clear()
-//               }
-//            }
-//            searchAdapter!!.notifyDataSetChanged()
-//        }
-//                .addOnFailureListener { exception ->
-//                    Log.d(TAG, "Error getting documents: ", exception)
-//                }
-//    }
-
     private fun retrieveUsers(input: String) {
         val db = Firebase.firestore
 
