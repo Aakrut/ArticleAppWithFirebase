@@ -29,6 +29,17 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/text_home_fullname_item_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
+            android:layout_toEndOf="@id/text_home_username_item_list"
+            android:text="username"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/text_home_title_item_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
