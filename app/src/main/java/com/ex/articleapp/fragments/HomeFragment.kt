@@ -16,6 +16,7 @@ import com.ex.articleapp.data.User
 import com.ex.articleapp.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
@@ -100,7 +101,7 @@ class HomeFragment : Fragment() {
     //Retrieve All Articles That You Follow
     private fun retrieveAllArticle() {
         val db = Firebase.firestore
-        val ref = db.collection("Articles")
+        val ref = db.collection("Articles").orderBy("time",Query.Direction.ASCENDING)
 
         ref.get().addOnSuccessListener { result ->
 

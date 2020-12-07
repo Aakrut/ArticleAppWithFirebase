@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.ex.articleapp.MainActivity
 import com.ex.articleapp.R
 import com.ex.articleapp.databinding.FragmentPublishArticleBinding
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -67,7 +68,8 @@ class PublishArticleFragment : Fragment() {
                     "publisher" to firebaseAuth.currentUser!!.uid,
                     "title" to title,
                     "about" to about,
-                    "explanation" to explanation
+                    "explanation" to explanation,
+                    "time" to Timestamp.now()
             )
 
             ref.document(title_id).set(hashmap).addOnSuccessListener {
