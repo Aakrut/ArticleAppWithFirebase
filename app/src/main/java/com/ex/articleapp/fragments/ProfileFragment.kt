@@ -2,15 +2,19 @@ package com.ex.articleapp.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ex.articleapp.LogInActivity
 import com.ex.articleapp.ProfileEditActvitiy
 import com.ex.articleapp.R
+import com.ex.articleapp.adapter.ProfileRecyClerAdapter
 import com.ex.articleapp.data.Article
 import com.ex.articleapp.data.User
 import com.ex.articleapp.databinding.FragmentProfileBinding
@@ -31,6 +35,10 @@ class ProfileFragment : Fragment() {
     //Firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
 
+    private var mArticle : MutableList<Article> ?= null
+
+    private var profileRecyClerAdapter :ProfileRecyClerAdapter ?= null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,9 +52,20 @@ class ProfileFragment : Fragment() {
         //Database Initialize
         val db = Firebase.firestore
 
+        mArticle = ArrayList()
+
         //Firebase FireStore Reference
         val ref= db.collection("Users").document(firebaseAuth.currentUser!!.uid)
-        
+
+
+        profileRecyClerAdapter = context?.let { ProfileRecyClerAdapter(it,
+            mArticle as ArrayList<Article>
+        ) }
+        profileBinding!!.recyclerViewArticlesProfile.setHasFixedSize(true)
+        profileBinding!!.recyclerViewArticlesProfile.layoutManager = LinearLayoutManager(context)
+        profileBinding!!.recyclerViewArticlesProfile.adapter = profileRecyClerAdapter
+
+
         ref.addSnapshotListener {  snapshot, e ->
             if (e != null) {
                 Log.d(TAG, "Listen failed.", e)
@@ -74,6 +93,8 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(context,ProfileEditActvitiy::class.java))
         }
 
+
+
         //LogOut Button
         profileBinding!!.logoutButton.setOnClickListener {
             firebaseAuth.signOut()
@@ -84,6 +105,7 @@ class ProfileFragment : Fragment() {
         val ref2 = db.collection("Articles").document(firebaseAuth.currentUser!!.uid)
 
         ref2.addSnapshotListener { snapshot, e ->
+            mArticle!!.clear()
             if (e != null) {
                 Log.w(TAG, "Listen failed.", e)
                 return@addSnapshotListener
@@ -92,9 +114,11 @@ class ProfileFragment : Fragment() {
             if (snapshot != null && snapshot.exists()) {
                 val article : Article? = snapshot.toObject(Article::class.java)
 
-                if(snapshot.exists()){
 
-                }
+                    if(article!!.publisher == firebaseAuth.currentUser!!.uid){
+                        mArticle!!.add(article)
+                    }
+                    profileRecyClerAdapter!!.notifyDataSetChanged()
             } else {
                 Log.d(TAG, "Current data: null")
             }
