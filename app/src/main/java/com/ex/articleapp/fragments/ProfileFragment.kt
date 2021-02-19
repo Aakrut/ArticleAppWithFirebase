@@ -11,6 +11,7 @@ import android.widget.ImageView
 import com.ex.articleapp.LogInActivity
 import com.ex.articleapp.ProfileEditActvitiy
 import com.ex.articleapp.R
+import com.ex.articleapp.data.Article
 import com.ex.articleapp.data.User
 import com.ex.articleapp.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -78,6 +79,25 @@ class ProfileFragment : Fragment() {
             firebaseAuth.signOut()
             startActivity(Intent(context,LogInActivity::class.java))
 
+        }
+
+        val ref2 = db.collection("Articles").document(firebaseAuth.currentUser!!.uid)
+
+        ref2.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w(TAG, "Listen failed.", e)
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null && snapshot.exists()) {
+                val article : Article? = snapshot.toObject(Article::class.java)
+
+                if(snapshot.exists()){
+
+                }
+            } else {
+                Log.d(TAG, "Current data: null")
+            }
         }
 
 
