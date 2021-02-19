@@ -20,6 +20,7 @@ import com.ex.articleapp.data.User
 import com.ex.articleapp.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
@@ -102,26 +103,27 @@ class ProfileFragment : Fragment() {
 
         }
 
-        val ref2 = db.collection("Articles").document(firebaseAuth.currentUser!!.uid)
 
-        ref2.addSnapshotListener { snapshot, e ->
+        val ref2 = db.collection("Articles").orderBy("time", Query.Direction.ASCENDING)
+
+        ref2.get().addOnSuccessListener { result ->
+
             mArticle!!.clear()
-            if (e != null) {
-                Log.w(TAG, "Listen failed.", e)
-                return@addSnapshotListener
-            }
+            for (document in result) {
+                Log.d(TAG, "${document.id} => ${document.data}")
+                val article : Article = document.toObject(Article::class.java)
+                Log.d(TAG, "retrieveAllArticle: $article")
 
-            if (snapshot != null && snapshot.exists()) {
-                val article : Article? = snapshot.toObject(Article::class.java)
-
-
-                    if(article!!.publisher == firebaseAuth.currentUser!!.uid){
+                    if(article.publisher == firebaseAuth.currentUser!!.uid){
                         mArticle!!.add(article)
+                        Log.d(TAG, "retrieveAllArticle: SuccessFully Reached")
                     }
-                    profileRecyClerAdapter!!.notifyDataSetChanged()
-            } else {
-                Log.d(TAG, "Current data: null")
+                    profileRecyClerAdapter?.notifyDataSetChanged()
+
+
             }
+        }.addOnFailureListener { exception ->
+            Log.d(TAG, "Error getting documents: ", exception)
         }
 
 
