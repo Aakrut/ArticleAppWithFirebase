@@ -85,18 +85,14 @@ class ProfileFragment : Fragment() {
                 Picasso.get().load(user.profile_photo).into(profileBinding!!.profileImageView)
 
 
-
                 Log.d(TAG, "Current data: ${snapshot.data}")
             } else {
                 Log.d(TAG, "Current data: null")
             }  }
 
-
         profileBinding!!.moreVert.setOnClickListener {
             startActivity(Intent(context,ProfileEditActvitiy::class.java))
         }
-
-
 
         //LogOut Button
         profileBinding!!.logoutButton.setOnClickListener {
@@ -104,7 +100,6 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(context,LogInActivity::class.java))
 
         }
-
 
             db.collection("Articles Author").document(Firebase.auth.currentUser!!.uid)
                 .collection("Article").get().addOnSuccessListener {documents ->
@@ -122,14 +117,7 @@ class ProfileFragment : Fragment() {
                     error ->
                     Log.d(TAG, "onCreateView: $error ")
                 }
-
-
-
-
         return view
     }
-
-
-
 
 }

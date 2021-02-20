@@ -70,6 +70,7 @@ class PublishArticleFragment : Fragment() {
                     "title" to title,
                     "about" to about,
                     "explanation" to explanation,
+                    "uid" to title_id,
                     "time" to Timestamp.now()
             )
 
@@ -78,13 +79,14 @@ class PublishArticleFragment : Fragment() {
                     "title" to title,
                     "about" to about,
                     "explanation" to explanation,
+                    "uid" to title_id,
                     "time" to Timestamp.now()
             )
             
             val ref2 = db.collection("Articles Author").document(Firebase.auth.currentUser!!.uid)
 
             ref.document(title_id).set(hashmap).addOnSuccessListener {
-                ref2.collection("Article").document(ref.document().id).set(hashmap2).addOnSuccessListener {
+                ref2.collection("Article").document(title_id).set(hashmap2).addOnSuccessListener {
                     Log.d(TAG, "publishArticle: SucessFully Saved")
                 }.addOnFailureListener {
                     Log.d(TAG, "publishArticle: Failed ")
