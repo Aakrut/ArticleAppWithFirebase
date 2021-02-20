@@ -101,7 +101,7 @@ class HomeFragment : Fragment() {
     //Retrieve All Articles That You Follow
     private fun retrieveAllArticle() {
         val db = Firebase.firestore
-        val ref = db.collection("Articles").orderBy("time",Query.Direction.ASCENDING)
+        val ref = db.collection("Articles").orderBy("time",Query.Direction.DESCENDING)
 
         ref.get().addOnSuccessListener { result ->
 

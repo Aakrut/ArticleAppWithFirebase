@@ -2,18 +2,15 @@ package com.ex.articleapp.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ex.articleapp.FullArticler
 import com.ex.articleapp.LogInActivity
 import com.ex.articleapp.ProfileEditActvitiy
-import com.ex.articleapp.R
 import com.ex.articleapp.adapter.ProfileRecyClerAdapter
 import com.ex.articleapp.data.Article
 import com.ex.articleapp.data.User
@@ -24,6 +21,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import kotlin.math.log
 
 
 class ProfileFragment : Fragment() {
@@ -40,6 +38,7 @@ class ProfileFragment : Fragment() {
 
     private var profileRecyClerAdapter :ProfileRecyClerAdapter ?= null
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,6 +54,8 @@ class ProfileFragment : Fragment() {
 
         mArticle = ArrayList()
 
+
+
         //Firebase FireStore Reference
         val ref= db.collection("Users").document(firebaseAuth.currentUser!!.uid)
 
@@ -65,6 +66,7 @@ class ProfileFragment : Fragment() {
         profileBinding!!.recyclerViewArticlesProfile.setHasFixedSize(true)
         profileBinding!!.recyclerViewArticlesProfile.layoutManager = LinearLayoutManager(context)
         profileBinding!!.recyclerViewArticlesProfile.adapter = profileRecyClerAdapter
+
 
 
         ref.addSnapshotListener {  snapshot, e ->
@@ -104,33 +106,30 @@ class ProfileFragment : Fragment() {
         }
 
 
-        val ref2 = db.collection("Articles").orderBy("time", Query.Direction.ASCENDING)
+            db.collection("Articles Author").document(Firebase.auth.currentUser!!.uid)
+                .collection("Article").get().addOnSuccessListener {documents ->
+                        (mArticle as ArrayList<Article>).clear()
+                    for(document in documents){
+                        Log.d(TAG, "onCreateView: $document")
+                        val article : Article = document.toObject(Article::class.java)
+                        if(article.publisher == Firebase.auth.currentUser!!.uid){
 
-        ref2.get().addOnSuccessListener { result ->
-
-            mArticle!!.clear()
-            for (document in result) {
-                Log.d(TAG, "${document.id} => ${document.data}")
-                val article : Article = document.toObject(Article::class.java)
-                Log.d(TAG, "retrieveAllArticle: $article")
-
-                    if(article.publisher == firebaseAuth.currentUser!!.uid){
-                        mArticle!!.add(article)
-                        Log.d(TAG, "retrieveAllArticle: SuccessFully Reached")
+                            (mArticle as ArrayList<Article>).add(article)
+                        }
+                        profileRecyClerAdapter?.notifyDataSetChanged()
                     }
-                    profileRecyClerAdapter?.notifyDataSetChanged()
-
-
-            }
-        }.addOnFailureListener { exception ->
-            Log.d(TAG, "Error getting documents: ", exception)
-        }
+                }.addOnFailureListener{
+                    error ->
+                    Log.d(TAG, "onCreateView: $error ")
+                }
 
 
 
 
         return view
     }
+
+
 
 
 }

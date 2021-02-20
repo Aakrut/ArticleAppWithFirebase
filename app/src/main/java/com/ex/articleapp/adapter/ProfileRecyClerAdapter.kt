@@ -4,18 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ex.articleapp.R
 import com.ex.articleapp.data.Article
-import com.ex.articleapp.databinding.SearchRecyclerItemListBinding
-import org.w3c.dom.Text
 
-class ProfileRecyClerAdapter(val context: Context , val article : List<Article>) : RecyclerView.Adapter<ProfileRecyClerAdapter.ViewHolder> () {
+class ProfileRecyClerAdapter(val context: Context , val article : List<Article> ) : RecyclerView.Adapter<ProfileRecyClerAdapter.ViewHolder> () {
 
 
-    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView)  {
 
         val text_title : TextView
         val text_about : TextView
@@ -24,7 +21,9 @@ class ProfileRecyClerAdapter(val context: Context , val article : List<Article>)
 
             text_title = itemView.findViewById(R.id.article_item_title)
             text_about = itemView.findViewById(R.id.article_item_about)
+
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,6 +41,8 @@ class ProfileRecyClerAdapter(val context: Context , val article : List<Article>)
     override fun getItemCount(): Int {
         return article.size
     }
+
+
 }
 
 

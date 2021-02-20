@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlin.math.log
 
 class PublishArticleFragment : Fragment() {
 
@@ -72,7 +73,22 @@ class PublishArticleFragment : Fragment() {
                     "time" to Timestamp.now()
             )
 
+            val hashmap2 = hashMapOf(
+                    "publisher" to firebaseAuth.currentUser!!.uid,
+                    "title" to title,
+                    "about" to about,
+                    "explanation" to explanation,
+                    "time" to Timestamp.now()
+            )
+            
+            val ref2 = db.collection("Articles Author").document(Firebase.auth.currentUser!!.uid)
+
             ref.document(title_id).set(hashmap).addOnSuccessListener {
+                ref2.collection("Article").document(ref.document().id).set(hashmap2).addOnSuccessListener {
+                    Log.d(TAG, "publishArticle: SucessFully Saved")
+                }.addOnFailureListener {
+                    Log.d(TAG, "publishArticle: Failed ")
+                }
                 Log.d(TAG, "onCreateView: SuccessFully Published")
                 Toast.makeText(context, "SuccessFully Published", Toast.LENGTH_SHORT).show()
                 val intent = Intent()
